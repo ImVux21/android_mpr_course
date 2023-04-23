@@ -54,4 +54,19 @@ public class Item {
     public void setUnitPrice(int unitPrice) {
         this.unitPrice = unitPrice;
     }
+
+    public String convertToVietNamDong() {
+        String price = String.valueOf(unitPrice);
+        StringBuilder stringBuilder = new StringBuilder();
+        int count = 0;
+        for (int i = price.length() - 1; i >= 0; i--) {
+            stringBuilder.append(price.charAt(i));
+            count++;
+            if (count == 3 && i != 0) {
+                stringBuilder.append(".");
+                count = 0;
+            }
+        }
+        return stringBuilder.reverse().toString();
+    }
 }

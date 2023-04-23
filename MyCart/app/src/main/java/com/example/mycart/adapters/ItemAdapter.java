@@ -61,7 +61,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         Item item = itemList.get(position);
         holder.itemNameTv.setText(item.getName());
-        holder.itemPriceTv.setText("₫ " + item.getUnitPrice());
+        holder.itemPriceTv.setText("₫ " + item.convertToVietNamDong());
 
         Constants.executor.execute(() -> {
             Bitmap bitmap = downloadImage(item.getThumbnail());

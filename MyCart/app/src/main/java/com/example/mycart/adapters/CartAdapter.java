@@ -53,7 +53,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         ItemCart itemCart = cartList.get(position);
 
         holder.itemNameTv.setText(itemCart.getName());
-        holder.itemPriceTv.setText("₫ " + itemCart.getPrice());
+        holder.itemPriceTv.setText("₫ " + itemCart.convertToVietNamDong());
         holder.itemQuantity.setText(String.valueOf(itemCart.getQuantity()));
         Constants.executor.execute(() -> {
             Bitmap bitmap = downloadImage(itemCart.getThumbnail());

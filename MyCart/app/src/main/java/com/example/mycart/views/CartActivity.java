@@ -32,7 +32,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
             for (ItemCart itemCart : itemCarts) {
                 price += itemCart.getPrice();
             }
-            totalCartPriceTv.setText("₫ " + price);
+            totalCartPriceTv.setText("₫ " + convertToVietNamDong(price));t
         });
     }
 
@@ -73,5 +73,20 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
             cartViewModel.deleteCartItem(itemCart.getId());
             cartAdapter.notifyDataSetChanged();
         }
+    }
+
+    private String convertToVietNamDong(int totalPrice) {
+        String price = String.valueOf(totalPrice);
+        StringBuilder result = new StringBuilder();
+        int count = 0;
+        for (int i = price.length() - 1; i >= 0; i--) {
+            result.append(price.charAt(i));
+            count++;
+            if (count == 3 && i != 0) {
+                result.append(".");
+                count = 0;
+            }
+        }
+        return result.reverse().toString();
     }
 }

@@ -32,7 +32,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
             for (ItemCart itemCart : itemCarts) {
                 price += itemCart.getPrice();
             }
-            totalCartPriceTv.setText("₫ " + convertToVietNamDong(price));t
+            totalCartPriceTv.setText("₫ " + convertToVietNamDong(price));
         });
     }
 

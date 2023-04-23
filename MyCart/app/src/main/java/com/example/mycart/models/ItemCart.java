@@ -83,4 +83,18 @@ public class ItemCart {
         return stringBuilder.reverse().toString();
     }
 
+    public String convertToVietNamDong(int price) {
+        String priceString = String.valueOf(price);
+        StringBuilder stringBuilder = new StringBuilder();
+        int count = 0;
+        for (int i = priceString.length() - 1; i >= 0; i--) {
+            stringBuilder.append(priceString.charAt(i));
+            count++;
+            if (count == 3 && i != 0) {
+                stringBuilder.append(".");
+                count = 0;
+            }
+        }
+        return stringBuilder.reverse().toString();
+    }
 }

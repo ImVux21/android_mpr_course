@@ -53,7 +53,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         ItemCart itemCart = cartList.get(position);
 
         holder.itemNameTv.setText(itemCart.getName());
-        holder.itemPriceTv.setText("₫ " + itemCart.convertToVietNamDong());
+        holder.itemPriceTv.setText("₫ " + itemCart.convertToVietNamDong(itemCart.getPrice() / itemCart.getQuantity()));
+        holder.totalEachItemPriceTv.setText("Total: ₫ " + itemCart.convertToVietNamDong());
         holder.itemQuantity.setText(String.valueOf(itemCart.getQuantity()));
         Constants.executor.execute(() -> {
             Bitmap bitmap = downloadImage(itemCart.getThumbnail());
@@ -76,13 +77,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     public class CartViewHolder extends RecyclerView.ViewHolder {
-        private TextView itemNameTv, itemPriceTv, itemQuantity;
+        private TextView itemNameTv, itemPriceTv, itemQuantity, totalEachItemPriceTv;
         private ImageView deleteItemBtn;
         private ImageView itemImageView;
         private ImageButton addQuantityBtn, minusQuantityBtn;
+
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            totalEachItemPriceTv = itemView.findViewById(R.id.eachCartTotalItemPriceTv);
             itemNameTv = itemView.findViewById(R.id.eachCartItemName);
             itemPriceTv = itemView.findViewById(R.id.eachCartItemPriceTv);
             deleteItemBtn = itemView.findViewById(R.id.eachCartItemDeleteBtn);
@@ -111,7 +114,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public interface CartClickedListeners {
         void onDeleteClicked(ItemCart itemCart);
+
         void onAddQuantityClicked(ItemCart itemCart);
+
         void onMinusQuantityClicked(ItemCart itemCart);
     }
 }
